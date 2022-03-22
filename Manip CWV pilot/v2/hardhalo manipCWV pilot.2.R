@@ -162,7 +162,7 @@ behaviors_lms <- behaviors_condition %>%
   full_join(behaviors_CWV, by='term') %>%
   full_join(behaviors_both_cond, by='term') %>%
   full_join(behaviors_both_CWV, by='term')
-write.csv(behaviors_lms, file='behaviors_lms.csv', row.names=F)
+write.csv(behaviors_lms, file='behaviors_lms.csv', row.names=F) # Converted regression results above into csv file
 
 
 summary(lm(bell_behav ~ condition, manipCWVpilot.2_onlymed))
