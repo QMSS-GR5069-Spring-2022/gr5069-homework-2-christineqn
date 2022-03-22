@@ -7,11 +7,15 @@ library(psych)
 # PREPROCESSING ########################################
 
 # read in data ####
-manipCWV.3_data <- read.csv("hardhalo manipCWV.3_num_030822.csv")
+#manipCWV.3_data = read.csv(file.choose())
+
+
+manipCWV.3_data <- read.csv("/load_data/hardhalo manipCWV.3_num_030822.csv")
 manipCWV.3_data <- manipCWV.3_data %>%
   filter(Status == 0)  #remove non-data rows (variable info + test rows)
 
 # rename ####
+# varnames = read_xlsx(file.choose(), sheet = "manipCWV.3")
 varnames <- read_xlsx("../../var names.xlsx", sheet = "manipCWV.3")
 oldnames <- varnames[!is.na(varnames$old), ]$old  #removing empty rows
 newnames <- varnames[!is.na(varnames$new), ]$new  #removing empty rows
@@ -91,7 +95,7 @@ manipCWV.3_data <- manipCWV.3_data %>%
                                       ifelse(self_bell >= highselfbell, "high", "med")), levels = c("low",
                                                                                                     "med", "high")))
 
-# write.csv(manipCWV.3_data, file='study1b_processed.csv',
+# write.csv(manipCWV.3_data, file='/output_data/study1b_processed.csv',
 # row.names=F) manipCWV.3_data <- read.csv('study1b_processed.csv')
 # %>% mutate(cat_selfbell = factor(cat_selfbell,
 # levels=c('low','med','high')))
