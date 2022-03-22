@@ -1,3 +1,11 @@
+---
+title: "hardhalo study1b pilot-V1"
+author: "Christine Nguyen "
+Date: 
+RStudio_Version:
+  ---
+  
+  
 setwd('C:/Users/c1/OneDrive/Desktop/Research/Hard halos F21/Manip CWV pilot/v2')
 
 library(dplyr)
@@ -154,7 +162,7 @@ behaviors_lms <- behaviors_condition %>%
   full_join(behaviors_CWV, by='term') %>%
   full_join(behaviors_both_cond, by='term') %>%
   full_join(behaviors_both_CWV, by='term')
-write.csv(behaviors_lms, file='behaviors_lms.csv', row.names=F)
+write.csv(behaviors_lms, file='behaviors_lms.csv', row.names=F) # Converted regression results above into csv file
 
 
 summary(lm(bell_behav ~ condition, manipCWVpilot.2_onlymed))
