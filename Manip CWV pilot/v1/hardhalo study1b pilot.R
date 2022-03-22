@@ -1,3 +1,10 @@
+---
+title: "hardhalo study1b pilot-V1"
+author: "Christine Nguyen "
+Date: 
+R Studio Version:
+---
+
 setwd('C:/Users/c1/OneDrive/Desktop/Fall 2021/Hard halos F21/Manip CWV pilot/v1')
 
 library(dplyr)
@@ -36,15 +43,15 @@ study1b_data <- study1b_data %>%
 
 # drop cases that fail the attention check ####
 study1b_data <- study1b_data %>%
-  filter(entered_mTurkID==workerId &
-           attencheck_1==2)
+  filter(entered_mTurkID==workerId & attencheck_1==2) #Reordered the structures to make the code more clear 
 # nrow(study1b_data) #145
 
 # calculate mean CWV ####
 # R=2,5,7,9,10
 # alpha(select(study1b_data, c(CWV_1:CWV_10)),
 #      check.keys=T)
-study1b_data <- study1b_data %>% rowwise() %>%
+study1b_data <- study1b_data %>% 
+  rowwise() %>% #Reordered the structures to make the code more clear 
   mutate(CWV = mean(c(CWV_1,CWV_6,8-CWV_10,8-CWV_5))) %>%
   ungroup()
 
@@ -68,6 +75,8 @@ study1b_data <- study1b_data %>%
 # alpha(select(study1b_data, c(competent, intelligent,
 #                             leader, negotiator, solver)),
 #       check.keys=T) #0.
+
+
 study1b_data <- study1b_data %>% rowwise() %>%
   mutate(gen_competent = mean(c(competent, intelligent)),
          org_competent = mean(c(leader, negotiator, solver))) %>%
@@ -84,6 +93,9 @@ study1b_data <- study1b_data %>% rowwise() %>%
 #       keys='warm') #0.87
 # alpha(select(study1b_data, c(cold, warm)),
 #       keys='warm') #0.9
+
+
+
 study1b_data <- study1b_data %>% rowwise() %>%
   mutate(posTIPI = mean(c(open, dependable, extravert, warm, calm)),
          genimpression = mean(c(pos_genimpression, 6-neg_genimpression)),
@@ -99,6 +111,7 @@ study1b_data <- study1b_data %>%
                                  ifelse(self_bell>=highselfbell,'high','med')),
                           levels=c('low','med','high')))
 
+
 # write.csv(study1b_data, file='study1b_processed.csv', row.names=F)
 study1b_data <- read.csv('study1b_processed.csv') %>%
   mutate(cat_selfbell = factor(cat_selfbell, levels=c('low','med','high')))
@@ -107,6 +120,8 @@ study1b_onlymed <- study1b_data %>% filter(cat_selfbell == 'med')
 
 study1b_onlyqual <- read_xlsx('study1b_processed.xlsx') %>%
   filter(screenopen==0) # screen garbage manipulation open responses
+
+
 # nrow(study1b_onlyqual) #76
 # nrow(study1b_onlyqual %>% filter(cat_selfbell == 'med'))
 
