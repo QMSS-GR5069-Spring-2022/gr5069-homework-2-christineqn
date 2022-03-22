@@ -14,7 +14,8 @@ library(psych)
 # PREPROCESSING ########################################
 
 # read in data ####
-study1b_data <- read.csv("hardhalo study1b pilot_num_012622.csv")
+#study1b_data = read.csv(file.choose())
+study1b_data <- read.csv("/load_data/hardhalo study1b pilot_num_012622.csv")
 study1b_data <- study1b_data %>%
   filter(Status == 0)  #remove non-data rows (variable info + test rows)
 
@@ -116,15 +117,20 @@ study1b_data <- study1b_data %>%
                                       ifelse(self_bell >= highselfbell, "high", "med")), levels = c("low",
                                                                                                     "med", "high")))
 
+#write.csv(study1b_data, file=file.choose(), row.names=TRUE, sep=',', col.names=TRUE)
 
-# write.csv(study1b_data, file='study1b_processed.csv', row.names=F)
-study1b_data <- read.csv("study1b_processed.csv") %>%
+# write.csv(study1b_data, file='output_data/study1b_processed.csv', row.names=F)
+
+#study1b_data = read.csv(file.choose())
+study1b_data <- read.csv("/load_data/study1b_processed.csv") %>%
   mutate(cat_selfbell = factor(cat_selfbell, levels = c("low", "med",
                                                         "high")))
 
+
+
 study1b_onlymed <- study1b_data %>%
   filter(cat_selfbell == "med")
-
+#study1b_onlyqual<-read_xlsx(file.choose())
 study1b_onlyqual <- read_xlsx("study1b_processed.xlsx") %>%
   filter(screenopen == 0)  # screen garbage manipulation open responses
 
