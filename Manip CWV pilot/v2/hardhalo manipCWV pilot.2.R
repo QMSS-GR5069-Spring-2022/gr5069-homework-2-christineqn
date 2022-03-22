@@ -15,12 +15,14 @@ library(psych)
 # PREPROCESSING ########################################
 
 # read in data ####
-manipCWVpilot.2_data <- read.csv("hardhalo manipCWV pilot.2_num_021322.csv")
+#manipCWVpilot.2_data = read.csv(file.choose())
+manipCWVpilot.2_data <- read.csv("/load_data/hardhalo manipCWV pilot.2_num_021322.csv")
 manipCWVpilot.2_data <- manipCWVpilot.2_data %>%
   filter(Status == 0)  #remove non-data rows (variable info + test rows)
 
 
 # rename ####
+# varnames = read_xlsx(file.choose(), sheet = "manipCWV pilot.2")
 varnames <- read_xlsx("../../var names.xlsx", sheet = "manipCWV pilot.2")
 oldnames <- varnames[!is.na(varnames$old), ]$old  #removing empty rows
 newnames <- varnames[!is.na(varnames$new), ]$new  #removing empty rows
@@ -107,8 +109,10 @@ manipCWVpilot.2_data <- manipCWVpilot.2_data %>%
   mutate(cat_selfbell = factor(ifelse(self_bell < lowselfbell, "low",
                                       ifelse(self_bell >= highselfbell, "high", "med")), levels = c("low",
                                                                                                     "med", "high")))
+#write.csv(manipCWVpilot.2_data, file=file.choose(), row.names=TRUE, sep=',', col.names=TRUE)
+# write.csv(manipCWVpilot.2_data, file='/output_data/manipCWVpilot.2_processed.csv', row.names=F)
 
-# write.csv(manipCWVpilot.2_data, file='manipCWVpilot.2_processed.csv', row.names=F)
+#manipCWVpilot.2_data = read.csv(file.choose())
 manipCWVpilot.2_data <- read.csv("manipCWVpilot.2_processed.csv") %>%
   mutate(cat_selfbell = factor(cat_selfbell, levels = c("low", "med",
                                                         "high")))
@@ -170,7 +174,10 @@ behaviors_lms <- behaviors_condition %>%
   full_join(behaviors_CWV, by = "term") %>%
   full_join(behaviors_both_cond, by = "term") %>%
   full_join(behaviors_both_CWV, by = "term")
-write.csv(behaviors_lms, file = "behaviors_lms.csv", row.names = F)  # Converted regression results above into csv file
+
+
+
+#write.csv(behaviors_lms, file = "/output_data/behaviors_lms.csv", row.names = F)  # Converted regression results above into csv file
 
 
 summary(lm(bell_behav ~ condition, manipCWVpilot.2_onlymed))
