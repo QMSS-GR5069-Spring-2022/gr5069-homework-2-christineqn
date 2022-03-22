@@ -1,3 +1,8 @@
+# csv files in the folder
+Manip CWV pilot/v1/*.csv
+Manip CWV pilot/v2/*.csv
+Manip CWV pilot/v3/*.csv
+Manip CWV pilot/v4/*.csv
 # OS files
 *.DS_Store
 
