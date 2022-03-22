@@ -1,3 +1,11 @@
+---
+title: "hardhalo study1b pilot-V1"
+author: "Christine Nguyen "
+Date: 
+RStudio_Version:
+  ---
+  
+  
 setwd('C:/Users/c1/OneDrive/Desktop/Research/Hard halos F21/Manip CWV pilot/v2')
 
 library(dplyr)
