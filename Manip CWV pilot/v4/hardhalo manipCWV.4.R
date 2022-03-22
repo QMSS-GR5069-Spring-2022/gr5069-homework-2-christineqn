@@ -15,11 +15,13 @@ library(psych)
 # PREPROCESSING ########################################
 
 # read in data ####
-manipCWV.4_data <- read.csv("hardhalo manipCWV.4_num_031622.csv")
+#manipCWV.4_data = read.csv(file.choose())
+manipCWV.4_data <- read.csv("/load_data/hardhalo manipCWV.4_num_031622.csv")
 manipCWV.4_data <- manipCWV.4_data %>%
   filter(Status == 0)  #remove non-data rows (variable info + test rows)
 
 # rename ####
+# varnames = read_xlsx(file.choose(), sheet = "manipCWV.4")
 varnames <- read_xlsx("../../var names.xlsx", sheet = "manipCWV.4")
 oldnames <- varnames[!is.na(varnames$old), ]$old  #removing empty rows
 newnames <- varnames[!is.na(varnames$new), ]$new  #removing empty rows
